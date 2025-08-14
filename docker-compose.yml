@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: laocai
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports: ['5432:5432']
+    volumes: [db_data:/var/lib/postgresql/data]
+  web:
+    build: .
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/laocai
+      SECRET_KEY: changeme-secret
+      DJANGO_DEBUG: 'true'
+      ALLOWED_HOSTS: '*'
+    depends_on: [db]
+    ports: ['8000:8000']
+volumes:
+  db_data:
