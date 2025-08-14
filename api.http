@@ -1,0 +1,20 @@
+### Health
+GET http://localhost:8000/api/health
+
+### Login
+POST http://localhost:8000/api/auth/login
+Content-Type: application/json
+
+{"username":"admin","password":"admin123"}
+
+### List roads (public)
+GET http://localhost:8000/api/roads?owner_unit=Sở%20Xây%20dựng&kind=Tỉnh%20lộ&ordering=length_km
+
+### Import roads (admin)
+POST http://localhost:8000/api/import/roads
+Content-Type: application/json
+Authorization: Bearer {{ACCESS_TOKEN}}
+
+[
+  {"name":"TL.156","kind":"Tỉnh lộ","owner_unit":"Sở Xây dựng","length_km":50,"status":"Tốt"}
+]
